@@ -100,6 +100,9 @@ task ampseq_dada2_process {
 	#set -x
 	mkdir fq_dir
 
+	R --version
+	R -e 'library("dada2")'
+
 	gsutil ls ~{path_to_fq}
 	gsutil -m cp -r ~{path_to_fq}* fq_dir/
 
