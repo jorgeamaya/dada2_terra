@@ -108,6 +108,8 @@ task ampseq_dada2_process {
 	ls Results/	
 	cat Results/stderr.txt
 	cat Results/stdout.txt
+	cat Results/DADA2/stdout.txt
+	cat Results/DADA2/stderr.txt
 
 	find . -type f
 	>>>
