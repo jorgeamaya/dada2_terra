@@ -55,6 +55,7 @@ parser$add_argument("-wA", "--omega_a", type="double", help="P-value threshold i
 parser$add_argument("-jC", "--justConcatenate", type="integer", help="Specify whether ASVs need to be concatenated with Ns instead of merging")
 parser$add_argument("-mM", "--maxMismatch", type="integer", help="Specify the maximum number of mismatches allowed during merging")
 parser$add_argument("--bimera", action='store_true', help="Optionally output list of sequences identified as bimeras")
+parser$add_argument("-b", "--barcodes", help="The path to a csv file with the sample_id,Forward,Reverse, where Forward and Reverse are columns with the barcodes for the sample")
 args <- parser$parse_args()
 
 #work_dir = '/Users/jorgeamaya/Desktop/Broad_Test/amplicon_decontamination_pipeline/Results/DADA2'
