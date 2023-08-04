@@ -46,9 +46,9 @@ workflow dada2_denoising_miseq {
 	output {
 		File rawfilelist_f = ampseq_dada2_process.rawfilelist
 		File missing_files_f = ampseq_dada2_process.missing_files
-		File ASVBimeras_f = ampseq_dada2_process.ASVBimeras
-		File CIGARVariants_Bfilter_f = ampseq_dada2_process.CIGARVariants_Bfilter
-		File seqtab_f = ampseq_dada2_process.seqtab
+#		File ASVBimeras_f = ampseq_dada2_process.ASVBimeras
+#		File CIGARVariants_Bfilter_f = ampseq_dada2_process.CIGARVariants_Bfilter
+#		File seqtab_f = ampseq_dada2_process.seqtab
 	}
 }
 
@@ -103,7 +103,7 @@ task ampseq_dada2_process {
 	gsutil ls ~{path_to_fq}
 	gsutil -m cp -r ~{path_to_fq}* fq_dir/
 
-	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2 --postproc_dada2 --asv_to_cigar
+	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal #--dada2 --postproc_dada2 --asv_to_cigar
 
 	ls Results/	
 	cat Results/stderr.txt
@@ -114,9 +114,9 @@ task ampseq_dada2_process {
 	output {
 		File rawfilelist = "Results/Fq_metadata/rawfilelist.tsv"
 		File missing_files = "Results/missing_files.tsv" 
-		File ASVBimeras = "Results/ASVBimeras.txt"
-		File CIGARVariants_Bfilter = "Results/CIGARVariants_Bfilter.out.tsv"
-		File seqtab = "Results/seqtab.tsv"
+#		File ASVBimeras = "Results/ASVBimeras.txt"
+#		File CIGARVariants_Bfilter = "Results/CIGARVariants_Bfilter.out.tsv"
+#		File seqtab = "Results/seqtab.tsv"
 	}
 	runtime {
 		cpu: 1
