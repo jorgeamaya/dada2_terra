@@ -104,6 +104,9 @@ task ampseq_dada2_process {
 	gsutil -m cp -r ~{path_to_fq}* fq_dir/
 
 	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2 --postproc_dada2 --asv_to_cigar
+	
+	cat Results/stderr.txt
+	cat Results/stdout.txt
 
 	find . -type f
 	>>>
