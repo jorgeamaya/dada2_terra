@@ -414,7 +414,7 @@ def main():
 		#else:
 		#	print(f"INFO: No mask data specified.", file=sys.stderr)
 		#	mask = {}
-		#mask = {}
+		mask = {}
 
 		print(f"INFO: Loading {path_to_fasta}")
 		asvs = ac.get_asv_seqs(path_to_fasta)
