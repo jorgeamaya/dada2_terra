@@ -407,6 +407,7 @@ def main():
 			sys.exit("ERROR: No amplicons")
 			#sys.exit(1)
 
+		mask = {}
 		#Disabled. Possibly deprecated
 		#if amp_mask:
 		#	print(f"INFO: Loading {amp_mask}", file=sys.stderr)
@@ -414,7 +415,6 @@ def main():
 		#else:
 		#	print(f"INFO: No mask data specified.", file=sys.stderr)
 		#	mask = {}
-		mask = {}
 
 		print(f"INFO: Loading {path_to_fasta}")
 		asvs = ac.get_asv_seqs(path_to_fasta)
@@ -453,14 +453,15 @@ def main():
 		print("INFO: Parsing alignments to CIGAR strings", file=sys.stderr)
 		cigars = ac.parse_alignments(bins, mask=mask, min_homopolymer_length=polyN, outdir=outdir, verbose=False)
 		print(cigars)
+		print("CIGARs WERE JUST PRINTED ABOVE")
 		if not cigars:
 			print("ERROR: could not determine CIGAR strings", file=sys.stderr)
 			sys.exit("ERROR: could not determine CIGAR strings")
 		#	#sys.exit(1)
 
-		#if path_asv_to_cigar:
-		#	ac.write_cigar_strings(cigars, path_asv_to_cigar)
-		#	print(f"INFO: Wrote ASV->CIGAR table to {path_asv_to_cigar}", file=sys.stderr)
+		if path_asv_to_cigar:
+			ac.write_cigar_strings(cigars, path_asv_to_cigar)
+			print(f"INFO: Wrote ASV->CIGAR table to {path_asv_to_cigar}", file=sys.stderr)
 
 		#print(f"INFO: Converting DADA2 seqtab file {path_to_seqtab} to {path_to_out}", file=sys.stderr)
 		#if ac.convert_seqtab(path_to_seqtab, cigars, path_to_out):
