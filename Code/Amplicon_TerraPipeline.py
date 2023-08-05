@@ -401,7 +401,6 @@ def main():
 
 		print(f"INFO: Loading {path_to_amp_db}", file=sys.stderr)
 		amplicons = ac.parse_amp_db(path_to_amp_db)
-		print(amplicons)
 		if not amplicons:
 			print(f"ERROR: No amplicons in {path_to_amp_db}", file=sys.stderr)
 			sys.exit("ERROR: No amplicons")
@@ -416,9 +415,7 @@ def main():
 		#	print(f"INFO: No mask data specified.", file=sys.stderr)
 		#	mask = {}
 
-		print(f"INFO: Loading {path_to_fasta}")
 		asvs = ac.get_asv_seqs(path_to_fasta)
-		print(asvs)
 		if not asvs:
 			print(f"ERROR: No ASV sequences in {path_to_fasta}", file=sys.stderr)
 			sys.exit("ERROR: No ASV sequences")	
@@ -435,7 +432,6 @@ def main():
 			print("INFO: Excluding ASVs that DADA2 marked as bimeras.", file=sys.stderr)
 
 		bins = ac.parse_asv_table(path_to_table, min_reads=min_reads, min_samples=min_samples, max_snv_dist=max_snv_dist, max_indel_dist=max_indel_dist, include_failed=include_failed, exclude_bimeras=exclude_bimeras) #This function only matches to the first strain.
-		print(bins)
 		if not bins:
 			print(f"ERROR: No useable data in {path_to_table}", file=sys.stderr)
 			sys.exit("ERROR: No useable data")
@@ -452,8 +448,6 @@ def main():
 
 		print("INFO: Parsing alignments to CIGAR strings", file=sys.stderr)
 		cigars = ac.parse_alignments(bins, mask=mask, min_homopolymer_length=polyN, outdir=outdir, verbose=False)
-		print(cigars)
-		print("CIGARs WERE JUST PRINTED ABOVE")
 		if not cigars:
 			print("ERROR: could not determine CIGAR strings", file=sys.stderr)
 			sys.exit("ERROR: could not determine CIGAR strings")

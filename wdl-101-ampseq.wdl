@@ -76,6 +76,7 @@ workflow dada2_denoising_miseq {
 		File missing_files_f = ampseq_dada2_process.missing_files
 		File ASVBimeras_f = ampseq_dada2_process.ASVBimeras
 		File CIGARVariants_Bfilter_f = ampseq_dada2_process.CIGARVariants_Bfilter
+		File ASV_to_CIGAR_f = ampseq_dada2_process.ASV_to_CIGAR_f
 		File seqtab_f = ampseq_dada2_process.seqtab
 	}
 }
@@ -156,38 +157,11 @@ task ampseq_dada2_process {
 	#set -x
 	mkdir fq_dir
 
-	R --version
-	R -e 'library("dada2")'
-
 	gsutil ls ~{path_to_fq}
 	gsutil -m cp -r ~{path_to_fq}* fq_dir/
 
-	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2 --postproc_dada2 #--asv_to_cigar
+	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2 --postproc_dada2 --asv_to_cigar
 
-	ls Results/	
-	cat Results/stderr.txt
-	cat Results/stdout.txt
-	cat Results/DADA2/stdout.txt
-	cat Results/DADA2/stderr.txt
-
-	cat Results/PostProc_DADA2/ASVSeqs.fasta
-	cat Results/PostProc_DADA2/ASVTable.txt
-
-	ls Results/PostProc_DADA2
-
-	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --asv_to_cigar
-
-	echo "LSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS RESULTS"
-	ls Results/
-
-	echo "PRINT ASV_to_CIGARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
-	cat Results/ASV_to_CIGAR/ASV_to_CIGAR.out.txt
-	
-	echo "PRINTING STDERR RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
-	cat Results/stderr.txt
-	echo "PRINTING STDOUT OUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUT"
-	cat Results/stdout.txt
-	echo "OUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUT"
 	find . -type f
 	>>>
 	output {
@@ -195,6 +169,7 @@ task ampseq_dada2_process {
 		File missing_files = "Results/missing_files.tsv" 
 		File ASVBimeras = "Results/ASVBimeras.txt"
 		File CIGARVariants_Bfilter = "Results/CIGARVariants_Bfilter.out.tsv"
+		File ASV_to_CIGAR = "Results/ASV_to_CIGAR/ASV_to_CIGAR.out.txt"
 		File seqtab = "Results/seqtab.tsv"
 	}
 	runtime {
