@@ -183,6 +183,7 @@ task ampseq_dada2_process {
 	cat Results/stderr.txt
 	echo "PRINTING STDOUT OUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUT"
 	cat Results/stdout.txt
+	echo "OUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUT"
 	find . -type f
 	>>>
 	output {

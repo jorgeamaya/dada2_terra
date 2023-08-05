@@ -424,20 +424,21 @@ def main():
 			sys.exit("ERROR: No ASV sequences")	
 			#sys.exit(1)
 
-		#print(f"INFO: Parsing {path_to_table} with total reads >= {min_reads}, samples >= {min_samples}, snv_dist <= {max_snv_dist}, indel_dist <= {max_indel_dist}", file=sys.stderr)
+		print(f"INFO: Parsing {path_to_table} with total reads >= {min_reads}, samples >= {min_samples}, snv_dist <= {max_snv_dist}, indel_dist <= {max_indel_dist}", file=sys.stderr)
 
-		#if include_failed:
-		#	print("WARNING: Including ASVs that failed post-DADA2 filters! This is not recommended.", file=sys.stderr)
-		#else:
-		#	print("INFO: Excluding ASVs that failed post-DADA2 filters.", file=sys.stderr)
+		if include_failed:
+			print("WARNING: Including ASVs that failed post-DADA2 filters! This is not recommended.", file=sys.stderr)
+		else:
+			print("INFO: Excluding ASVs that failed post-DADA2 filters.", file=sys.stderr)
 
-		#if exclude_bimeras:
-		#	print("INFO: Excluding ASVs that DADA2 marked as bimeras.", file=sys.stderr)
+		if exclude_bimeras:
+			print("INFO: Excluding ASVs that DADA2 marked as bimeras.", file=sys.stderr)
 
-		#bins = ac.parse_asv_table(path_to_table, min_reads=min_reads, min_samples=min_samples, max_snv_dist=max_snv_dist, max_indel_dist=max_indel_dist, include_failed=include_failed, exclude_bimeras=exclude_bimeras) #This function only matches to the first strain.
-		#if not bins:
-		#	print(f"ERROR: No useable data in {path_to_table}", file=sys.stderr)
-		#	sys.exit("ERROR: No useable data")
+		bins = ac.parse_asv_table(path_to_table, min_reads=min_reads, min_samples=min_samples, max_snv_dist=max_snv_dist, max_indel_dist=max_indel_dist, include_failed=include_failed, exclude_bimeras=exclude_bimeras) #This function only matches to the first strain.
+		print(bins)
+		if not bins:
+			print(f"ERROR: No useable data in {path_to_table}", file=sys.stderr)
+			sys.exit("ERROR: No useable data")
 			#sys.exit(1)
 
 		#outdir = path_to_alignments
