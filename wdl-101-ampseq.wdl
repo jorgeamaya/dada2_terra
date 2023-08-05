@@ -76,7 +76,7 @@ workflow dada2_denoising_miseq {
 		File missing_files_f = ampseq_dada2_process.missing_files
 		File ASVBimeras_f = ampseq_dada2_process.ASVBimeras
 		File CIGARVariants_Bfilter_f = ampseq_dada2_process.CIGARVariants_Bfilter
-		File ASV_to_CIGAR_f = ampseq_dada2_process.ASV_to_CIGAR_f
+		File ASV_to_CIGAR_f = ampseq_dada2_process.ASV_to_CIGAR
 		File seqtab_f = ampseq_dada2_process.seqtab
 	}
 }
