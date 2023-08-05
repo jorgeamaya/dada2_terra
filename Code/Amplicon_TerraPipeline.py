@@ -401,9 +401,10 @@ def main():
 
 		print(f"INFO: Loading {path_to_amp_db}", file=sys.stderr)
 		amplicons = ac.parse_amp_db(path_to_amp_db)
-		#if not amplicons:
-		#	print(f"ERROR: No amplicons in {path_to_amp_db}", file=sys.stderr)
-		#	sys.exit("ERROR: No amplicons")
+		print(amplicons)
+		if not amplicons:
+			print(f"ERROR: No amplicons in {path_to_amp_db}", file=sys.stderr)
+			sys.exit("ERROR: No amplicons")
 			#sys.exit(1)
 
 		#Disabled. Possibly deprecated
