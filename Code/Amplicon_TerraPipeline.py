@@ -441,29 +441,30 @@ def main():
 			sys.exit("ERROR: No useable data")
 			#sys.exit(1)
 
-		#outdir = path_to_alignments
-		#print(f"INFO: Writing amplicon fasta files to {outdir}", file=sys.stderr)
-		#if not os.path.isdir(outdir):
-		#	os.mkdir(outdir)
-		#ac.write_amplicon_fastas(asvs, bins, amplicons, outdir=outdir)
+		outdir = path_to_alignments
+		print(f"INFO: Writing amplicon fasta files to {outdir}", file=sys.stderr)
+		if not os.path.isdir(outdir):
+			os.mkdir(outdir)
+		ac.write_amplicon_fastas(asvs, bins, amplicons, outdir=outdir)
 
-		#print("INFO: Running MUSCLE aligner on amplicon fasta files. Please wait...", file=sys.stderr)
-		#ac.run_muscle(bins, outdir=outdir)
+		print("INFO: Running MUSCLE aligner on amplicon fasta files. Please wait...", file=sys.stderr)
+		ac.run_muscle(bins, outdir=outdir)
 
-		#print("INFO: Parsing alignments to CIGAR strings", file=sys.stderr)
-		#cigars = ac.parse_alignments(bins, mask=mask, min_homopolymer_length=polyN, outdir=outdir, verbose=False)
-		#if not cigars:
-		#	print("ERROR: could not determine CIGAR strings", file=sys.stderr)
-		#	sys.exit("ERROR: could not determine CIGAR strings")
+		print("INFO: Parsing alignments to CIGAR strings", file=sys.stderr)
+		cigars = ac.parse_alignments(bins, mask=mask, min_homopolymer_length=polyN, outdir=outdir, verbose=False)
+		print(cigars)
+		if not cigars:
+			print("ERROR: could not determine CIGAR strings", file=sys.stderr)
+			sys.exit("ERROR: could not determine CIGAR strings")
 			#sys.exit(1)
 
-		#if path_asv_to_cigar:
-		#	ac.write_cigar_strings(cigars, path_asv_to_cigar)
-		#	print(f"INFO: Wrote ASV->CIGAR table to {path_asv_to_cigar}", file=sys.stderr)
+		if path_asv_to_cigar:
+			ac.write_cigar_strings(cigars, path_asv_to_cigar)
+			print(f"INFO: Wrote ASV->CIGAR table to {path_asv_to_cigar}", file=sys.stderr)
 
-		#print(f"INFO: Converting DADA2 seqtab file {path_to_seqtab} to {path_to_out}", file=sys.stderr)
-		#if ac.convert_seqtab(path_to_seqtab, cigars, path_to_out):
-		#	print("INFO: Completed successfully!", file=sys.stderr)
+		print(f"INFO: Converting DADA2 seqtab file {path_to_seqtab} to {path_to_out}", file=sys.stderr)
+		if ac.convert_seqtab(path_to_seqtab, cigars, path_to_out):
+			print("INFO: Completed successfully!", file=sys.stderr)
 
 if __name__ == "__main__":
 	main()
