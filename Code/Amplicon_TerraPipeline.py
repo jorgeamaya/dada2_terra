@@ -416,11 +416,12 @@ def main():
 		#	mask = {}
 		#mask = {}
 
-		#print(f"INFO: Loading {path_to_fasta}")
-		#asvs = ac.get_asv_seqs(path_to_fasta)
-		#if not asvs:
-		#	print(f"ERROR: No ASV sequences in {path_to_fasta}", file=sys.stderr)
-		#	sys.exit("ERROR: No ASV sequences")	
+		print(f"INFO: Loading {path_to_fasta}")
+		asvs = ac.get_asv_seqs(path_to_fasta)
+		print(asvs)
+		if not asvs:
+			print(f"ERROR: No ASV sequences in {path_to_fasta}", file=sys.stderr)
+			sys.exit("ERROR: No ASV sequences")	
 			#sys.exit(1)
 
 		#print(f"INFO: Parsing {path_to_table} with total reads >= {min_reads}, samples >= {min_samples}, snv_dist <= {max_snv_dist}, indel_dist <= {max_indel_dist}", file=sys.stderr)

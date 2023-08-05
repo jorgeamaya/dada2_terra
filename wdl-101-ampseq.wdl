@@ -177,8 +177,11 @@ task ampseq_dada2_process {
 
 	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --asv_to_cigar
 
+	echo "LSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS RESULTS"
 	ls Results/	
+	echo "PRINTING STDERR RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
 	cat Results/stderr.txt
+	ECHO "PRINTING STDOUT OUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUT"
 	cat Results/stdout.txt
 	find . -type f
 	>>>
