@@ -162,13 +162,16 @@ task ampseq_dada2_process {
 	gsutil ls ~{path_to_fq}
 	gsutil -m cp -r ~{path_to_fq}* fq_dir/
 
-	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2 --postproc_dada2 #--asv_to_cigar
+	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2 --postproc_dada2 --asv_to_cigar
 
 	ls Results/	
 	cat Results/stderr.txt
 	cat Results/stdout.txt
 	cat Results/DADA2/stdout.txt
 	cat Results/DADA2/stderr.txt
+
+	cat Results/PostProc_DADA2/ASVSeqs.fasta
+	cat Results/PostProc_DADA2/ASVTable.txt
 
 	ls Results/PostProc_DADA2
 
