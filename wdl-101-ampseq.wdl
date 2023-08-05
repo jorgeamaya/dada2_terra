@@ -178,7 +178,11 @@ task ampseq_dada2_process {
 	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --asv_to_cigar
 
 	echo "LSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS RESULTS"
-	ls Results/	
+	ls Results/
+
+	echo "PRINT ASV_to_CIGARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
+	cat Results/ASV_to_CIGAR/ASV_to_CIGAR.out.txt
+	
 	echo "PRINTING STDERR RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR"
 	cat Results/stderr.txt
 	echo "PRINTING STDOUT OUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUT"
