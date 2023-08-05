@@ -20,6 +20,20 @@ workflow dada2_denoising_miseq {
 		Int justConcatenate = 0
 		Int maxMismatch = 0
 		String path_to_DADA2 = '/Code'
+		File path_to_snv
+		String no_ref = 'False'
+		File reference
+		String adjust_mode = "absolute"
+		File reference2
+		String strain = "3D7"
+		String strain2 = "DD2"
+		String polyN = "5"
+		String min_reads = "0"
+		String min_samples = "0"
+		String max_snv_dist = "-1"
+		String max_indel_dist = "-1"
+		String include_failed = "False"
+		String exclude_bimeras = "False"
 	}
 	call ampseq_dada2_process {
 		input:
@@ -41,6 +55,20 @@ workflow dada2_denoising_miseq {
 			justConcatenate = justConcatenate,
 			maxMismatch = maxMismatch,
 			path_to_DADA2 = path_to_DADA2,
+			path_to_snv = path_to_snv,
+			no_ref = no_ref,
+			reference = reference,
+			adjust_mode = adjust_mode,
+			reference2 = reference2,
+			strain = strain,
+			strain2 = strain2,
+			polyN = polyN,
+			min_reads = min_reads,
+			min_samples = min_samples,
+			max_snv_dist = max_snv_dist,
+			max_indel_dist = max_indel_dist,
+			include_failed = include_failed,
+			exclude_bimeras = exclude_bimeras
 	}
 
 	output {
@@ -72,6 +100,20 @@ task ampseq_dada2_process {
 		Int justConcatenate = 0
 		Int maxMismatch = 0
 		String path_to_DADA2 = '/Code'
+		File path_to_snv
+		String no_ref = 'False'
+		File reference
+		String adjust_mode = "absolute"
+		File reference2
+		String strain = "3D7"
+		String strain2 = "DD2"
+		String polyN = "5"
+		String min_reads = "0"
+		String min_samples = "0"
+		String max_snv_dist = "-1"
+		String max_indel_dist = "-1"
+		String include_failed = "False"
+		String exclude_bimeras = "False"
 	}
 
 	Map[String, String] in_map = {
@@ -93,6 +135,20 @@ task ampseq_dada2_process {
 		"justConcatenate": justConcatenate,
 		"maxMismatch": maxMismatch,
 		"path_to_DADA2": path_to_DADA2,
+		"path_to_snv": sub(path_to_snv, "gs://", "/cromwell_root/"),
+		"no_ref": no_ref,
+		"reference": sub(reference, "gs://", "/cromwell_root/"),
+		"adjust_mode": adjust_mode,
+		"reference2": sub(reference2, "gs://", "/cromwell_root/"),
+		"strain": strain,
+		"strain2": strain2,
+		"polyN": polyN,
+		"min_reads": min_reads,
+		"min_samples": min_samples,
+		"max_snv_dist": max_snv_dist,
+		"max_indel_dist": max_indel_dist,
+		"include_failed": include_failed,
+		"exclude_bimeras": exclude_bimeras
 	}
 	File config_json = write_json(in_map)
 	command <<<
@@ -113,6 +169,8 @@ task ampseq_dada2_process {
 	cat Results/stdout.txt
 	cat Results/DADA2/stdout.txt
 	cat Results/DADA2/stderr.txt
+
+	ls Results/PostProc_DADA2
 
 	find . -type f
 	>>>
